@@ -6,7 +6,13 @@ A Chinese security researcher user shared, and then deleted the information that
 * Use the modified logger to write a valid JSP file that contains a webshell.
 * Use the webshell for remote execution tomfoolery.
 
-Praetorian and others (ex. [@testanull](https://twitter.com/testanull/status/1509185015187345411)) publicly confirmed that they have replicated the issue, and several hours later, demo applications (linked below) were released so others could easily verify on their own and learn about this vulnerability. This is being described as a bypass for CVE-2010-1622 - and it is currently *unpatched*. Please read over Praetorian's guidance [here](https://www.praetorian.com/blog/spring-core-jdk9-rce/) which includes detailed identification and mitigation steps.
+Only hours later more people (including myself) realized that a lot more could be done and has been confirmed with more and more possibilities coming out every hour.
+
+Two RCEs exist actually not just the original one. Three vectors are being discussed (one is not known to be remotely exploitable).
+
+Confirmed: "Spring4Shell" in Spring Core that has been confirmed by several sources that leverages class injection (very severe),
+Confirmed: CVE-2022-22963 in Spring Cloud Function (less severe),
+Unconfirmed: A third weakness that was initially discussed as allowing RCE via Deserialization, but isn't exploitable (not severe currently).
 
 ## Resources
 
@@ -24,5 +30,10 @@ Additional demonstration apps are available with slightly different conditions w
 
 * https://github.com/Retrospected/spring-rce-poc
 
+## Mitigation
+
+If you're using Spring Core, this is currently the only known remediation for patching this attack. There is no patch available (as of 3-30-2022 @ 2:30pm).
+
+According to the Praetorian post confirming the presence of an RCE in Spring Core, the currently recommended approach for is to patch DataBinder by adding a blacklist of vulnerable field patterns required for exploitation.
 
 ## Note: I will be uploading translations and further explanation of the exploit shortly, feel free to create a pull request!
