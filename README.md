@@ -14,6 +14,10 @@ Go check out vx-underground's archive here: https://share.vx-underground.org/Spr
 
 ## PoC / Testing the exploit
 
+The following non-malicious request can be used to test susceptibility to the SpringCore 0day RCE. An HTTP 400 return code indicates vulnerability.
+
+`$ curl host:port/path?class.module.classLoader.URLs%5B0%5D=0`
+
 A few sample applications have been made so you can validate the PoC works, as well as learn more about what cases are exploitable. Tthe **simplest** example of this I can find is courtesy of @freeqaz of LunaSec, who developed [github.com/lunasec-io/spring-rce-vulnerable-app](https://github.com/lunasec-io/spring-rce-vulnerable-app/blob/main/src/main/java/fr/christophetd/log4shell/vulnerableapp/MainController.java).
 
 Additional demonstration apps are available with slightly different conditions where this vulnerability would be exploitable:
